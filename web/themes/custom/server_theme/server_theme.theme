@@ -38,6 +38,7 @@ function server_theme_theme() {
       'items' => [],
       // Possible values are `start`, `center`, `end` or NULL to have no change.
       'align' => NULL,
+      'full_width' => FALSE,
     ],
   ];
 
@@ -228,6 +229,14 @@ function server_theme_theme() {
     ],
   ];
 
+  // Card with elements positioned in the center of it, used for person cards.
+  $info['server_theme_inner_element_layout__centered__person_cards'] = [
+    'variables' => [
+      // A render array.
+      'items' => NULL,
+    ],
+  ];
+
   // Card with a top image. Used often for content teasers/ cards.
   $info['server_theme_inner_element_layout__with_image'] = [
     'variables' => [
@@ -285,6 +294,16 @@ function server_theme_theme() {
   // A simple horizontal line separator.
   $info['server_theme_line_separator'] = [
     'variables' => [],
+  ];
+
+  // The horizontal layout for inner elements.
+  $info['server_theme_inner_element_layout__horizontal'] = [
+    'variables' => [
+      // Number of columns.
+      'columns' => NULL,
+      // A render array.
+      'items' => [],
+    ],
   ];
 
   // A quotation sign, used on the Quote element.
@@ -419,6 +438,14 @@ function server_theme_theme() {
     ],
   ];
 
+  // Wrapper for a text, creating a badge.
+  $info['server_theme_text_badge'] = [
+    'variables' => [
+      'color' => NULL,
+      'element' => [],
+    ],
+  ];
+
   // An image, with the image credit overlay.
   $info['server_theme_image_with_credit_overlay'] = [
     'variables' => [
@@ -443,6 +470,20 @@ function server_theme_theme() {
   $info['server_theme_social_share_buttons'] = [
     'variables' => [
       'items' => NULL,
+    ],
+  ];
+
+  // The 'Email' button, displayed on person card.
+  $info['server_theme_card_email_button'] = [
+    'variables' => [
+      'email' => NULL,
+    ],
+  ];
+
+  // The 'Call' button, displayed on person card.
+  $info['server_theme_card_call_button'] = [
+    'variables' => [
+      'phone' => NULL,
     ],
   ];
 
