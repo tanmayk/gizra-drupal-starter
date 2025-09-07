@@ -28,6 +28,14 @@ function server_theme_theme() {
     ],
   ];
 
+  // Full width wrapper.
+  $info['server_theme_container_full'] = [
+    'variables' => [
+      'element' => [],
+      'bg_color' => NULL,
+    ],
+  ];
+
   // A wrapper that has a `gap-y-5` between all elements. All elements on a
   // typical PEVB need to be wrapped by this one, so it keeps a consistent
   // vertical distance between all the elements. Each element can still add
@@ -38,7 +46,6 @@ function server_theme_theme() {
       'items' => [],
       // Possible values are `start`, `center`, `end` or NULL to have no change.
       'align' => NULL,
-      'full_width' => FALSE,
     ],
   ];
 

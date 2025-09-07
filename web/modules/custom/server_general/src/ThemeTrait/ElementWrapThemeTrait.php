@@ -75,19 +75,42 @@ trait ElementWrapThemeTrait {
   }
 
   /**
+   * Wrap an element with a full width container, and optional background color.
+   *
+   * @param array $element
+   *   The render array.
+   * @param \Drupal\server_general\ThemeTrait\Enum\BackgroundColorEnum $bg_color
+   *   The background color.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function wrapContainerFull(array $element, BackgroundColorEnum $bg_color = BackgroundColorEnum::Transparent): array {
+    $element = $this->filterEmptyElements($element);
+    if (empty($element)) {
+      // Element is empty, so no need to wrap it.
+      return [];
+    }
+
+    return [
+      '#theme' => 'server_theme_container_full',
+      '#element' => $element,
+      '#bg_color' => $bg_color->value,
+    ];
+  }
+
+  /**
    * Wrap an element with a regular vertical spacing.
    *
    * @param array $element
    *   Render array.
    * @param \Drupal\server_general\ThemeTrait\Enum\AlignmentEnum $align
    *   Determine the alignment of flex.
-   * @param bool $full_width
-   *   Whether the elements should occupy full width of parent.
    *
    * @return array
    *   Render array.
    */
-  protected function wrapContainerVerticalSpacing(array $element, AlignmentEnum $align = AlignmentEnum::Default, bool $full_width = FALSE): array {
+  protected function wrapContainerVerticalSpacing(array $element, AlignmentEnum $align = AlignmentEnum::Default): array {
     $element = $this->filterEmptyElements($element);
     if (empty($element)) {
       // Element is empty, so no need to wrap it.
@@ -98,7 +121,6 @@ trait ElementWrapThemeTrait {
       '#theme' => 'server_theme_container_vertical_spacing',
       '#items' => $element,
       '#align' => $align->value,
-      '#full_width' => $full_width,
     ];
   }
 

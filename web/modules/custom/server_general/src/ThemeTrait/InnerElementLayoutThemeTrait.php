@@ -62,16 +62,15 @@ trait InnerElementLayoutThemeTrait {
    *
    * @param array $items
    *   The elements as render array.
-   * @param bool $full_width
-   *   Whether the elements should occupy full width of parent.
    *
    * @return array
    *   Render array.
    */
-  protected function buildInnerElementLayoutCenteredPersonCards(array $items, bool $full_width = FALSE): array {
+  protected function buildInnerElementLayoutCenteredPersonCards(array $items): array {
+    $items = $this->wrapContainerVerticalSpacing($items, AlignmentEnum::Center);
     return [
       '#theme' => 'server_theme_inner_element_layout__centered__person_cards',
-      '#items' => $this->wrapContainerVerticalSpacing($items, AlignmentEnum::Center, $full_width),
+      '#items' => $this->wrapContainerFull($items),
     ];
   }
 

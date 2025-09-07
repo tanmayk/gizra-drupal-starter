@@ -27,20 +27,4 @@ trait CardThemeTrait {
     ];
   }
 
-  /**
-   * Wrap multiple cards with a grid.
-   *
-   * @param array $items
-   *   The elements as render array.
-   *
-   * @return array
-   *   Render array.
-   */
-  protected function buildCardPerson(array $items): array {
-    return [
-      '#theme' => 'server_theme_cards__person',
-      '#items' => $items,
-    ];
-  }
-
 }

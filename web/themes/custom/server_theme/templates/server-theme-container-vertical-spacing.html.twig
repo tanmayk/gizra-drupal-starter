@@ -8,6 +8,6 @@
   ] | join(' ') | trim %}
   {{ classes }}
 {% endmacro %}
-<div class="{{ _self.getClass(align) }} {{ full_width ? 'w-full' }}">
+<div class="{{ _self.getClass(align) }}">
   {{ items }}
 </div>

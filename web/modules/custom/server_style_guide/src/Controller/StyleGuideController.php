@@ -789,7 +789,6 @@ class StyleGuideController extends ControllerBase {
   protected function getSinglePersonCard(): array {
 
     $person = [
-      'picture' => $this->getPlaceholderPersonImage(100),
       'name' => 'Jane Cooper',
       'subtitle' => 'Paradigm Representative',
       'role' => 'Admin',
@@ -800,7 +799,7 @@ class StyleGuideController extends ControllerBase {
     return $this->buildElementLayoutTitleBodyAndItems(
       $this->getRandomTitle(),
       $this->buildProcessedText('This is a single person card.'),
-      $this->buildElementPersonCard($person),
+      $this->buildElementPersonCard($person['name'], $person['email'], $person['subtitle'], $person['role'], $person['phone']),
     );
   }
 
@@ -815,7 +814,6 @@ class StyleGuideController extends ControllerBase {
 
     $people = [
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'Jane Cooper',
         'subtitle' => 'Paradigm Representative',
         'role' => 'Admin',
@@ -823,7 +821,6 @@ class StyleGuideController extends ControllerBase {
         'phone' => '+1-212-456-7890',
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'Jon Doe',
         'subtitle' => 'General Director',
         'role' => 'Admin',
@@ -831,7 +828,6 @@ class StyleGuideController extends ControllerBase {
         'phone' => '+1-212-456-7120',
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'Rick Morty',
         'subtitle' => 'Regional Manager',
         'role' => 'Manager',
@@ -839,7 +835,6 @@ class StyleGuideController extends ControllerBase {
         'phone' => '+1-212-456-7210',
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'David Bowie',
         'subtitle' => 'Data Analyst',
         'role' => 'Analyst',
@@ -847,7 +842,6 @@ class StyleGuideController extends ControllerBase {
         'phone' => '+1-212-456-7821',
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'Jane Cooper',
         'subtitle' => 'Paradigm Representative',
         'role' => 'Admin',
@@ -855,7 +849,6 @@ class StyleGuideController extends ControllerBase {
         'phone' => '+1-212-456-7890',
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'Jon Doe',
         'subtitle' => 'General Director',
         'role' => 'Admin',
@@ -863,7 +856,6 @@ class StyleGuideController extends ControllerBase {
         'phone' => '+1-212-456-7120',
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'Rick Morty',
         'subtitle' => 'Regional Manager',
         'role' => 'Manager',
@@ -871,23 +863,20 @@ class StyleGuideController extends ControllerBase {
         'phone' => '+1-212-456-7210',
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'David Bowie',
         'subtitle' => 'Data Analyst',
         'role' => 'Analyst',
         'email' => 'davidbowie@example.com',
-        'phone' => '+1-212-456-7821',
+        'phone' => NULL,
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'Rick Morty',
         'subtitle' => 'Regional Manager',
         'role' => 'Manager',
         'email' => 'rickmorty@example.com',
-        'phone' => '+1-212-456-7210',
+        'phone' => NULL,
       ],
       [
-        'picture' => $this->getPlaceholderPersonImage(100),
         'name' => 'David Bowie',
         'subtitle' => 'Data Analyst',
         'role' => 'Analyst',
@@ -897,7 +886,7 @@ class StyleGuideController extends ControllerBase {
     ];
 
     foreach ($people as $person) {
-      $items[] = $this->buildElementPersonCard($person);
+      $items[] = $this->buildElementPersonCard($person['name'], $person['email'], $person['subtitle'], $person['role'], $person['phone']);
     }
 
     return $this->buildElementPersonCards(
