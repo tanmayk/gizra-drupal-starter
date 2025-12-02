@@ -9,6 +9,7 @@ use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\paragraphs\ParagraphInterface;
 use Drupal\server_general\ThemeTrait\Enum\AlignmentEnum;
+use Drupal\server_general\ThemeTrait\Enum\BadgeColorEnum;
 use Drupal\server_general\ThemeTrait\Enum\BackgroundColorEnum;
 use Drupal\server_general\ThemeTrait\Enum\FontSizeEnum;
 use Drupal\server_general\ThemeTrait\Enum\FontWeightEnum;
@@ -68,6 +69,31 @@ trait ElementWrapThemeTrait {
 
     return [
       '#theme' => 'server_theme_container_narrow',
+      '#element' => $element,
+      '#bg_color' => $bg_color->value,
+    ];
+  }
+
+  /**
+   * Wrap an element with a full width container, and optional background color.
+   *
+   * @param array $element
+   *   The render array.
+   * @param \Drupal\server_general\ThemeTrait\Enum\BackgroundColorEnum $bg_color
+   *   The background color.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function wrapContainerFull(array $element, BackgroundColorEnum $bg_color = BackgroundColorEnum::Transparent): array {
+    $element = $this->filterEmptyElements($element);
+    if (empty($element)) {
+      // Element is empty, so no need to wrap it.
+      return [];
+    }
+
+    return [
+      '#theme' => 'server_theme_container_full',
       '#element' => $element,
       '#bg_color' => $bg_color->value,
     ];
@@ -557,6 +583,33 @@ trait ElementWrapThemeTrait {
 
     return [
       '#theme' => 'server_theme_text_decoration__font_color',
+      '#color' => $color->value,
+      '#element' => $element,
+    ];
+  }
+
+  /**
+   * Wrap an element with badge.
+   *
+   * @param array|string|\Drupal\Core\StringTranslation\TranslatableMarkup $element
+   *   The render array, string or a TranslatableMarkup object.
+   * @param \Drupal\server_general\ThemeTrait\Enum\BadgeColorEnum $color
+   *   The font color.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function wrapTextBadge(array|string|TranslatableMarkup $element, BadgeColorEnum $color): array {
+    if (is_array($element)) {
+      $element = $this->filterEmptyElements($element);
+    }
+    if (empty($element)) {
+      // Element is empty, so no need to wrap it.
+      return [];
+    }
+
+    return [
+      '#theme' => 'server_theme_text_badge',
       '#color' => $color->value,
       '#element' => $element,
     ];

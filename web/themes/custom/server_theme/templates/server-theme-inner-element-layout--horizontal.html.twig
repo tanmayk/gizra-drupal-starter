@@ -1,0 +1,4 @@
+{% set items_count = items|length %}
+<div class="grid grid-cols-1 sm:grid-cols-{{ items_count }} {{ items_count > 1 ? 'sm:divide-x' }} w-full">
+  {{ items }}
+</div>

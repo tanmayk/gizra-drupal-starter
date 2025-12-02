@@ -58,6 +58,23 @@ trait InnerElementLayoutThemeTrait {
   }
 
   /**
+   * Build "Centered card" layout for person cards.
+   *
+   * @param array $items
+   *   The elements as render array.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function buildInnerElementLayoutCenteredPersonCards(array $items): array {
+    $items = $this->wrapContainerVerticalSpacing($items, AlignmentEnum::Center);
+    return [
+      '#theme' => 'server_theme_inner_element_layout__centered__person_cards',
+      '#items' => $this->wrapContainerFull($items),
+    ];
+  }
+
+  /**
    * Build "Card with image" layout.
    *
    * This is the "base" helper method for rendering a card with image. Specific
@@ -101,6 +118,25 @@ trait InnerElementLayoutThemeTrait {
       '#image' => $image,
       '#url' => $url,
       '#items' => $this->wrapContainerVerticalSpacing($items),
+    ];
+  }
+
+  /**
+   * Build "Card with horizontal elements" layout.
+   *
+   * @param array $items
+   *   The items' render array.
+   * @param int $columns
+   *   The number of columns. Defaults to 2.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function buildInnerElementLayoutHorizontal(array $items, int $columns = 2): array {
+    return [
+      '#theme' => 'server_theme_inner_element_layout__horizontal',
+      '#columns' => $columns,
+      '#items' => $items,
     ];
   }
 

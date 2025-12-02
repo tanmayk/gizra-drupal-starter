@@ -1,0 +1,11 @@
+{% if color == 'green' %}
+  {% set color_classes = 'bg-green-100 text-green-800' %}
+{% elseif color == 'yellow' %}
+  {% set color_classes = 'bg-yellow-100 text-yellow-800' %}
+{% elseif color == 'red' %}
+  {% set color_classes = 'bg-red-100 text-red-800' %}
+{% endif %}
+
+<div class="{{ color_classes }} px-2 py-1 rounded-full">
+  {{ element }}
+</div>
