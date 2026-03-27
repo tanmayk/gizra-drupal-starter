@@ -20,6 +20,7 @@ use Drupal\server_general\ThemeTrait\Enum\HtmlTagEnum;
 use Drupal\server_general\ThemeTrait\InfoCardThemeTrait;
 use Drupal\server_general\ThemeTrait\NewsTeasersThemeTrait;
 use Drupal\server_general\ThemeTrait\PeopleTeasersThemeTrait;
+use Drupal\server_general\ThemeTrait\PersonCardsThemeTrait;
 use Drupal\server_general\ThemeTrait\QuickLinksThemeTrait;
 use Drupal\server_general\ThemeTrait\QuoteThemeTrait;
 use Drupal\server_general\ThemeTrait\SearchThemeTrait;
@@ -43,6 +44,7 @@ class StyleGuideController extends ControllerBase {
   use InfoCardThemeTrait;
   use NewsTeasersThemeTrait;
   use PeopleTeasersThemeTrait;
+  use PersonCardsThemeTrait;
   use QuickLinksThemeTrait;
   use QuoteThemeTrait;
   use SearchThemeTrait;
@@ -194,6 +196,12 @@ class StyleGuideController extends ControllerBase {
 
     $element = $this->getWebformElement();
     $build[] = $this->wrapElementNoContainer($element, 'Element: Webform');
+
+    $element = $this->getSinglePersonCard();
+    $build[] = $this->wrapElementNoContainer($element, 'Element: Person Card (Single)');
+
+    $element = $this->getPersonCards();
+    $build[] = $this->wrapElementNoContainer($element, 'Element: Person Cards');
 
     return $build;
   }
@@ -752,7 +760,122 @@ class StyleGuideController extends ControllerBase {
       $this->buildProcessedText('How does the system generate all this custom content? It actually skims Wikipedia pages related to your search'),
       Link::fromTextAndUrl('View more', Url::fromRoute('<front>')),
     );
+  }
 
+  /**
+   * Get Person cards element.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function getSinglePersonCard(): array {
+
+    $person = [
+      'name' => 'Jane Cooper',
+      'subtitle' => 'Paradigm Representative',
+      'role' => 'Admin',
+      'email' => 'janecooper@example.com',
+      'phone' => '+1-212-456-7890',
+    ];
+
+    return $this->buildElementLayoutTitleBodyAndItems(
+      $this->getRandomTitle(),
+      $this->buildProcessedText('This is a single person card.'),
+      $this->buildElementPersonCard($person['name'], $person['email'], $person['subtitle'], $person['role'], $person['phone']),
+    );
+  }
+
+  /**
+   * Get Person cards element.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function getPersonCards(): array {
+    $items = [];
+
+    $people = [
+      [
+        'name' => 'Jane Cooper',
+        'subtitle' => 'Paradigm Representative',
+        'role' => 'Admin',
+        'email' => 'janecooper@example.com',
+        'phone' => '+1-212-456-7890',
+      ],
+      [
+        'name' => 'Jon Doe',
+        'subtitle' => 'General Director',
+        'role' => 'Admin',
+        'email' => 'jondoe@example.com',
+        'phone' => '+1-212-456-7120',
+      ],
+      [
+        'name' => 'Rick Morty',
+        'subtitle' => 'Regional Manager',
+        'role' => 'Manager',
+        'email' => 'rickmorty@example.com',
+        'phone' => '+1-212-456-7210',
+      ],
+      [
+        'name' => 'David Bowie',
+        'subtitle' => 'Data Analyst',
+        'role' => 'Analyst',
+        'email' => 'davidbowie@example.com',
+        'phone' => '+1-212-456-7821',
+      ],
+      [
+        'name' => 'Jane Cooper',
+        'subtitle' => 'Paradigm Representative',
+        'role' => 'Admin',
+        'email' => 'janecooper@example.com',
+        'phone' => '+1-212-456-7890',
+      ],
+      [
+        'name' => 'Jon Doe',
+        'subtitle' => 'General Director',
+        'role' => 'Admin',
+        'email' => 'jondoe@example.com',
+        'phone' => '+1-212-456-7120',
+      ],
+      [
+        'name' => 'Rick Morty',
+        'subtitle' => 'Regional Manager',
+        'role' => 'Manager',
+        'email' => 'rickmorty@example.com',
+        'phone' => '+1-212-456-7210',
+      ],
+      [
+        'name' => 'David Bowie',
+        'subtitle' => 'Data Analyst',
+        'role' => 'Analyst',
+        'email' => 'davidbowie@example.com',
+        'phone' => NULL,
+      ],
+      [
+        'name' => 'Rick Morty',
+        'subtitle' => 'Regional Manager',
+        'role' => 'Manager',
+        'email' => 'rickmorty@example.com',
+        'phone' => NULL,
+      ],
+      [
+        'name' => 'David Bowie',
+        'subtitle' => 'Data Analyst',
+        'role' => 'Analyst',
+        'email' => 'davidbowie@example.com',
+        'phone' => '+1-212-456-7821',
+      ],
+    ];
+
+    foreach ($people as $person) {
+      $items[] = $this->buildElementPersonCard($person['name'], $person['email'], $person['subtitle'], $person['role'], $person['phone']);
+    }
+
+    return $this->buildElementPersonCards(
+      $this->getRandomTitle(),
+      $this->buildProcessedText('This is a list of awesome people.'),
+      $items,
+    );
   }
 
   /**
